@@ -73,11 +73,11 @@ P.S I've had to alt tab into edge/slack to test the bot in my private channel. H
 
 I also did some housekeeping in the ```index.js``` considering its the place im gonna be yapping a lot in so yeah.
 
-# Journal (number)
+# Journal 4
 
 Time spent ~ 1hr and like 10 min
 
-Github Commit: will come in next commit
+Github Commit: https://github.com/CreativeDragon1/streakbuddy/commit/d91c5a60b22d9497c940bc9067d4ea6f1322fb59
 
 ## AI DISCLOSURE
 
@@ -87,6 +87,27 @@ Mainly used it for checking me code cause for some dumb ah reason it just won't 
 So yeah, after like a bajilliion crashouts with my friends, hackatime api just being stupid, I FINALLY GOT THE ACCESS TOKEN YAYYAYAYAYYAY. I WAS ABLE TO STORE IT in a variable called ```token```. Now i have to figure out how to actually use this Access token, which I spent like 10 min just reading the docs for AND I STILL COULDNT UNDERSTAND SHI like who made it bru, its geniunely so hard to follow as a beginner and considering hackclub is a place where your gonna find a lot of beginners its way to hard to understand. welp this journal slowly becoming a meta post anyway.
 
 So yeah, I re worked how the access token is collected, before I was doing it in a way too big if statement and then the indexes got to me as I couldnt follow where what was, i heavily commented and FINALLY it sort of works, I still need to find a way to get like get the slack id using it which imma figure out next. Using that slack ID ill be able to store the access token for later use :0.
+
+# Journal 5
+
+Time spent ~ 1 hour
+
+Github Commit: will come in next commit
+
+## AI DISCLOSURE
+
+Using AI for commit message again, and use it again to help me debug, cuz I keep making stupid typos and I am still understanding how this whole thing works. I am doing this with like broken knowledge about JS, C++ and Python which is a task for me, BUT I AM LEARNING WHICH IS IMPORTANT
+
+## What I did
+
+I GOT THE HOUR THINGY WORKING BABYYY, now when you use the command ```/streaksaver-hours```, its going to output the number of seconds you spent coding that week so yeah lets gooooo man, finally got that bit working as well. YAY
+
+I am learning the importance of comments now and HOW Much they help us undersstand what we have written. Although my code migght seem repetitive whit me just changing some logic, it still requires a lot of my brain cells which im slowly loosing as I continue coding.
+
+Next, I am going to implement a reminder system which should hopefully DM you at times YOU can set (default to 9pm) to do work if you haven't done work already. Not sure HOW I am gonna implement it but where there is a will there is a way I gues, and there is ChatGPT asw /j
+
+WISH ME LUCK AHHH
+
 
 # DELETE BELOW BEFORE SHIPPING
 # FORMAT
