@@ -1,4 +1,8 @@
-DISCLOSURE: Time spents are just estimates, they are what I think ive spent on the project, but I can be way off the actual time spent.
+DISCLOSURE: 
+
+-Time spents are just estimates, they are what I think ive spent on the project, but I can be way off the actual time spent.
+-I am new to coding in JS, and have not coded a slack bot before thats not vibe coded. The amount of work i might have changed maynot make sense for my gh commit, but I've had to constantly create/delete parts of my code to make sure it works, I don't like commiting, non working code. 
+-I have tried to commit every hour but sometimes, i loose track of time and commit after 1hr 30 min so apoligies for that.
 
 # Journal 1
 
@@ -146,11 +150,11 @@ I made a super duper basic website for like the webhooks. This commit is a rathe
 I also updated ```/streaksaver-help``` with all the new commands i added
 
 
-# Journal (number)
+# Journal 8
 
 Time spent ~ 30 min
 
-Github Commit: will come in next commit
+Github Commit: https://github.com/CreativeDragon1/streakbuddy/commit/e5b8029f28b63e5c03935123a24e3f03f20a943a
 
 ## AI DISCLOSURE
 Used AI to understand how I can use the github pages website to actually have you do the hackatime thingy, so it told me to have host a server, but ofc, I can't do that duh, so my next best alternative was to use my laptop as a sevrver as thats the cheapest, fastest and probably easiest way. 
@@ -161,11 +165,11 @@ On my very basic website for hackatime login, i added a login button that you sh
 I added a feature also where you can set the time you want to be reminded at which is kinda cool cuz I got to learn how to use regex ofcourse with gpts help, but yeah, to check formating of the value inputted, i used regex which was so damn cool! and yeah it will now ping you if you set the time, and it would defaults to 1800 if not set
 
 
-# Journal (number)
+# Journal 9
 
 Time spent ~ 1hours
 
-Github Commit: will come in next commit
+Github Commit: https://github.com/CreativeDragon1/streakbuddy/commit/e5b8029f28b63e5c03935123a24e3f03f20a943a
 
 ## AI DISCLOSURE
 Used AI for debugging the problems I found and fixed them so yaaaaaaaaaa, sooo tired UGH. All the bits I have fully ai generated have been marked :0
@@ -175,6 +179,21 @@ Used AI for debugging the problems I found and fixed them so yaaaaaaaaaa, sooo t
 I spent some time doing some bug fixing cause it started I was adding wayy too many different features quickly without testing them and oh boy was i in for a treat, the uri stopped working, there were issues with setting the time goal and yeah, an whole array of issues which im glad i addressed right now. Its sad that a lot of the work I did didnt get logged because I had to leave the IDE here and there, to go to slack api or slack to test the bot but its fine I guess :sad_pepe:
 
 I fixed the errors, atleasst I tried to, and I hope most of them are resolved now, Ive got 1hr 45 min to go and its 2 am rn AHHH.
+
+# Journal 10
+
+Time spent 1 hour
+
+Github Commit: will come in next commit
+
+## AI DISCLOSURE
+Used AI to generate a bit of the code ~5-6 lines cause I could not get the stupid date thingy to work like at all idk why. and used AI for my bug solving but but, ive had to use it wayyy less, I was able to do a lot more bug solving by myself rather than have to go to AI to help me which is GOOOD
+
+## What I did
+I worked on another set interval that refreshes every 5 min, it checks thru every users data and sees if they have like done the minimum amount of hours (30min) everyday. I am happy I was able to this fully by myself (i reused some of the code as well) and uh I also added the logic that if 30 min is done then dont send the reminder to the dude cuz why would you want it right. 
+
+AND ALWAYS REMEMBER TO PUT THE START DATE IN THE URL AND NOT THE HEADER, my dumb ah wasted 20 min tryna figure out why it wouldnt work by myself, i caught so many syntax errors along the way and god do i forget to put ```;``` python has truely spoilt me.
+
 
 # DELETE BELOW BEFORE SHIPPING
 # FORMAT

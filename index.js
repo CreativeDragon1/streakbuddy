@@ -22,6 +22,7 @@ const auth_token = [];
 const remind = [];
 const timezones = [];
 const times = [];
+const done = [];
 
 
 // ------------------------------- VARIABLES END -------------------------------
@@ -132,21 +133,35 @@ Commands available:
 app.command("/streaksaver-hours", async ({ command, ack, respond }) => {
     await ack();
 
-    const now = new Date();
-    const date = now.toISOString().split("T")[0];
+    // AII ALERT
+    // I tried my best to go on stack over flow find solutions but my problem was so niche, since we live in different timezones and im guessing hackatime servers 
+    //live in the us, the timezones dont match, i have no idea what im doing wrong, so i had to resort to using AI EVEN IF I DIDNT WANT TO
+    const date = new Date();
+    date.setDate(date.getDate());
 
-    const response = await fetch("https://hackatime.hackclub.com/api/v1/authenticated/hours", {
+    const formatter = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/New_York',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+
+    const yesterdaysDate = formatter.format(date);
+    console.log(yesterdaysDate);
+
+    // AI END
+    const response = await fetch(`https://hackatime.hackclub.com/api/v1/authenticated/hours?start_date=${yesterdaysDate}`, {
         method: "GET",
         headers: {
-            Authorization: `Bearer ${auth_token[command.user_id]}`,
-            start_date: date
+            start_date: yesterdaysDate, //YOU HAD TO PUT THE THING IN URL NOT HEADERS I am gen so dumb 
+            Authorization: `Bearer ${auth_token[command.user_id]}`
         }
     });
 
     const json = await response.json();
     console.log(json);
 
-    const time = json.total_seconds
+    const time = (json.total_seconds) / 3600;
 
     await respond({ text: `Logged hours for this week: ${time}` });
 
@@ -193,7 +208,7 @@ app.command("/streaksaver-get_goal", async ({ ack, command, respond }) => {
 
 // BOT CONNECTING TO HACKATIME IMPORTANT 
 
-// NOT DONE YET HAVE TO IMPLEMENT
+//  DONE YET HAVE TO IMPLEMENT
 
 app.command("/streaksaver-connect", async ({ ack, command, respond }) => {
     await ack();
@@ -266,12 +281,55 @@ app.command("/streaksaver-reminder-time", async ({ ack, respond, command }) => {
 //implementation
 
 setInterval(async () => {
+
+    // AII ALERT
+    // I tried my best to go on stack over flow find solutions but my problem was so niche, since we live in different timezones and im guessing hackatime servers 
+    //live in the us, the timezones dont match, i have no idea what im doing wrong, so i had to resort to using AI EVEN IF I DIDNT WANT TO
+    const date = new Date();
+    date.setDate(date.getDate());
+
+    const formatter = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/New_York',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+
+    const yesterdaysDate = formatter.format(date);
+    console.log(yesterdaysDate);
+
+    // AI END
+
+    for (const userId in remind) {
+
+        const response = await fetch(`https://hackatime.hackclub.com/api/v1/authenticated/hours?start_date=${yesterdaysDate}`, {
+            method: "GET",
+            headers: {
+                start_date: yesterdaysDate, //YOU HAD TO PUT THE THING IN URL NOT HEADERS I am gen so dumb 
+                Authorization: `Bearer ${auth_token[userId]}`
+            }
+        });
+
+        const json = await response.json();
+        console.log(json);
+
+        const time = (json.total_seconds) / 60;
+
+        if (time > 30) {
+            done[userId] = "true";
+        } else {
+            done[userId = "false"];
+        }
+    }
+}, 5 * 60 * 1000);
+
+setInterval(async () => {
     const now = new Date();
     for (const userId in remind) {
         console.log(userId, remind[userId]);
 
         //AI generated below bit, cuz i dont understand it asw
-        if (remind[userId] === "true") {
+        if (remind[userId] === "true" && done[userId === "false"]) {
 
             const dm = await app.client.conversations.open({
                 users: userId,
@@ -299,7 +357,7 @@ setInterval(async () => {
             };
         };
     };
-}, 60*1000);
+}, 60 * 1000);
 
 
 // ------------------------------- BOT END -------------------------------
