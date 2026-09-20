@@ -18,6 +18,7 @@ const app = new App({
 // ------------------------------- VARIABLES START -------------------------------
 
 const goals = [];
+const auth_codes = [];
 
 // ------------------------------- VARIABLES END -------------------------------
 // ------------------------------- HACKATIME START -------------------------------
@@ -38,20 +39,88 @@ server.get("/login", (req, res) => {
     res.redirect(`https://hackatime.hackclub.com/oauth/authorize?${params}`);
 });
 
-server.get("/finish", (req, res) => {
-    const true_state = req.cookies.oauth_state;
-    const hackatime_state = req.query.state;
 
-    if (true_state === hackatime_state) {
-        console.log("IT WORKED BABYYY");
-        // res.cookie("code", res.query.code);
+
+server.get("/finish", (req, res) => {
+    const ture_state = req.cookies.oauth_state;
+    const hackatime_state = req.query.state;
+    
+    // CHECKING IF STATE IS SAME SAME
+
+    if(hackatime_state != ture_state){
+        return res.status(400).send("Invalid OAuth State")
     }
-    // console.log(req.cookies.code);
-})
+
+    // Getting authorisation code
+
+    // Setting params
+
+    const params = new URLSearchParams({
+        client_id: process.env.UID,
+        client_secret: process.env.SECRET,
+        code: req.query.code,
+        redirect_uri: process.env.URI,
+        grant_type: "authorization_code"
+    });
+
+    // Getting the access token and storing it in token
+    
+    fetch(`https://hackatime.hackclub.com/oauth/token?${params}`, {
+        method: "POST"
+    })
+    .then(response => response.json())
+    .then(json => {
+        console.log(json);
+        res.send("OAuth Sucessful");
+        const token = json.access_token;
+        console.log(token);
+    });
+
+
+});
+
+// server.get("/finish", (req, res) => {
+//     const true_state = req.cookies.oauth_state;
+//     const hackatime_state = req.query.state;
+
+//     if (true_state === hackatime_state) {
+//         const params = new URLSearchParams({
+//             client_id: process.env.UID,
+//             client_secret: process.env.SECRET,
+//             code: req.query.code,
+//             redirect_uri: process.env.URI,
+//             grant_type: "authorization_code"
+//         });
+
+//         console.log("IT WORKED BABYYY");
+//         res.cookie("code", req.query.code);
+
+//         fetch(`https://hackatime.hackclub.com/oauth/token?${params}`, {
+//             method: "POST"
+//         })
+//             .then(response => response.json())
+//             .then(json => {
+//                 console.log(json);
+//                 res.send("OAuth Successful");
+//                 console.log(json.access_token);
+//             })
+//             .catch(error => {
+//                 console.error(error);
+//                 res.status(500).send("OAuth failed");
+//             });
+
+
+//         // console.log(req.cookies.code);
+//     }
+// });
+
+
+
 
 
 // ------------------------------- HACKATIME END -------------------------------
 // ------------------------------- BOT START -------------------------------
+
 app.command("/streaksaver-help", async ({ command, ack, respond }) => {
     await ack();
     await respond({
@@ -63,6 +132,23 @@ Commands available:
 /streaksaver-get_goal - tells you what your goal was
         `})
     // Update the above string whenever you add a new command IMPORTANT
+});
+
+app.command("/streaksaver-hours", async ({ command, ack, respond }) => {
+    await ack();
+
+    fetch(`https://hackatime.hackclub.com/oauth/token?${params}`, {
+        method: "POST"
+    })
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+            res.send("OAuth Successful");
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).send("OAuth failed");
+        });
 });
 
 app.command("/streaksaver-ping", async ({ command, ack, respond }) => {

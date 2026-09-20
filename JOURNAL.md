@@ -58,7 +58,7 @@ This state is stored in the users cookies, so lives locally on the users browser
 
 Time spent ~40min
 
-Github Commit: will come in next commit
+Github Commit: https://github.com/CreativeDragon1/streakbuddy/commit/250bcd76fe3c1806285931f1ecdf491ebf718530
 
 ## AI DISCLOSURE
 
@@ -72,6 +72,21 @@ Project is coming along pretty nicely, I have to write a README.md soon as well,
 P.S I've had to alt tab into edge/slack to test the bot in my private channel. Hopefully no time deductions. 
 
 I also did some housekeeping in the ```index.js``` considering its the place im gonna be yapping a lot in so yeah.
+
+# Journal (number)
+
+Time spent ~ 1hr and like 10 min
+
+Github Commit: will come in next commit
+
+## AI DISCLOSURE
+
+Mainly used it for checking me code cause for some dumb ah reason it just won't WORK like WHY and used the ai gen for commits cuz its easier and my friend told me that I dont write good commits
+
+## What I did
+So yeah, after like a bajilliion crashouts with my friends, hackatime api just being stupid, I FINALLY GOT THE ACCESS TOKEN YAYYAYAYAYYAY. I WAS ABLE TO STORE IT in a variable called ```token```. Now i have to figure out how to actually use this Access token, which I spent like 10 min just reading the docs for AND I STILL COULDNT UNDERSTAND SHI like who made it bru, its geniunely so hard to follow as a beginner and considering hackclub is a place where your gonna find a lot of beginners its way to hard to understand. welp this journal slowly becoming a meta post anyway.
+
+So yeah, I re worked how the access token is collected, before I was doing it in a way too big if statement and then the indexes got to me as I couldnt follow where what was, i heavily commented and FINALLY it sort of works, I still need to find a way to get like get the slack id using it which imma figure out next. Using that slack ID ill be able to store the access token for later use :0.
 
 # DELETE BELOW BEFORE SHIPPING
 # FORMAT
