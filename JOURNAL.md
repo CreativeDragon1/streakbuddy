@@ -92,7 +92,7 @@ So yeah, I re worked how the access token is collected, before I was doing it in
 
 Time spent ~ 1 hour
 
-Github Commit: will come in next commit
+Github Commit: https://github.com/CreativeDragon1/streakbuddy/commit/b104460e3eebe8be04de156cf8a625fba1bd757f
 
 ## AI DISCLOSURE
 
@@ -107,6 +107,25 @@ I am learning the importance of comments now and HOW Much they help us underssta
 Next, I am going to implement a reminder system which should hopefully DM you at times YOU can set (default to 9pm) to do work if you haven't done work already. Not sure HOW I am gonna implement it but where there is a will there is a way I gues, and there is ChatGPT asw /j
 
 WISH ME LUCK AHHH
+
+# Journal 6
+
+Time spent ~ 1 hour
+
+Github Commit: will come in next commit
+
+## AI DISCLOSURE
+
+Using AI for commit again. Same usage as before, understand what the code is acc all about and how to use certain stuff. Like I did not know how to make a bot send a dm to you so I used chatgpt to understand the syntax, and yeah, I did use gpt to fully generate a small bit of the code where I get each persons local time, cuz I do NOT know how to do that its gen so hard
+
+## What I did
+
+Its currently 12:20am, my eyes are dead and my brain processing speed has fallen more than my grades. I didn't do that much or considerably that much but i created 2 new commands ```/streaksaver-remind``` and ```/streaksaver-un-remind``` which as the name says will opt you in or out for a reminder message. The way it works is when you run ```/streaksaver-remind```, you load your timezone (taken from your slack data) and you opt in for reminders. ```/streaksaver-un-remind``` simply removes you from the list.
+
+I also implemented a new set interval that will cycle every second (going to increase it to a min or every 5 min) where its going to cycle through every single users current time zone and if it matches with the time they have set to be reminded at. 
+
+
+AHHH im so tired
 
 
 # DELETE BELOW BEFORE SHIPPING

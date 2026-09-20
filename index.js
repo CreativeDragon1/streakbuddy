@@ -19,6 +19,8 @@ const app = new App({
 
 const goals = [];
 const auth_token = [];
+const remind = [];
+const timezones = [];
 
 // ------------------------------- VARIABLES END -------------------------------
 // ------------------------------- HACKATIME START -------------------------------
@@ -99,6 +101,8 @@ server.get("/finish", (req, res) => {
 // ------------------------------- HACKATIME END -------------------------------
 // ------------------------------- BOT START -------------------------------
 
+// ALL THE COMMANDS STUFF HERE
+
 // HELP UPDATE AT THE END REMEMBER TO DO SO
 
 app.command("/streaksaver-help", async ({ command, ack, respond }) => {
@@ -117,23 +121,26 @@ Commands available:
 // CHECK HOURS
 
 app.command("/streaksaver-hours", async ({ command, ack, respond }) => {
-    await ack();    
+    await ack();
+
+    const now = new Date();
+    const date = now.toISOString().split("T")[0];
 
     const response = await fetch("https://hackatime.hackclub.com/api/v1/authenticated/hours", {
         method: "GET",
         headers: {
             Authorization: `Bearer ${auth_token[command.user_id]}`,
-            start_date: Date.now()
+            start_date: date
         }
     });
 
     const json = await response.json();
     console.log(json);
-    
+
     const time = json.total_seconds
 
     await respond({ text: `Logged hours for this week: ${time}` });
-    
+
 });
 
 //PINGS BABY
@@ -215,6 +222,58 @@ app.action("connect", async ({ ack, respond }) => {
 
     await respond("hello")
 })
+
+app.command("/streaksaver-remind", async ({ ack, command, response }) => {
+    await ack();
+    remind[command.user_id] = "true";
+    timezones[command.user_id] = command.timeZone;
+
+    console.log("done")
+    // await app.client.chat.postMessage({
+    //     channel: command.user_id,
+    //     text: "GO WORK ON YOUR PROJECT!"
+    // })
+});
+
+app.command("/streaksaver-un-remind", async ({ ack, response, command }) => {
+    await ack();
+    remind[command.user_id] = "false"
+    console.log("removed")
+});
+// COMMAND END
+// BACKGROUND LOOP
+
+//LOGIC so this thing is gonna check every minute and thru all the users if like the dude has a reminder set at that time
+//Problem 1 I need to store everyones like timezone data somewhere, this can probably be done by just creating a slash command that you run that will start reminders for you
+//implementation
+
+setInterval(async () => {
+    const now = new Date();
+
+    for (const userId in remind) {
+        console.log(userId, remind[userId]);
+
+        //AI generated below bit, cuz i dont understand it asw
+        if (remind[userId] === "true") {
+            const localTime = new Intl.DateTimeFormat("en-GB", {
+                timeZone: timezones[userId],
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: false
+            }).format(now);
+            //AI slop ends here
+
+            console.log(localTime)
+            if (localTime === "00:10") {
+                await app.client.chat.postMessage({
+                    channel: command.user_id,
+                    text: "GO WORK ON YOUR PROJECT!"
+                });
+            };
+        };
+    };
+}, 1000);
+
 
 // ------------------------------- BOT END -------------------------------
 // ------------------------------- API SHYT -------------------------------
