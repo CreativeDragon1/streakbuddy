@@ -15,31 +15,64 @@ const app = new App({
     socketMode: true
 });
 
-// Variables
+// ------------------------------- VARIABLES START -------------------------------
 
 const goals = [];
 
-app.command("/doyowork-help", async ({ command, ack, respond }) => {
+// ------------------------------- VARIABLES END -------------------------------
+// ------------------------------- HACKATIME START -------------------------------
+
+server.get("/login", (req, res) => {
+    const state = crypto.randomBytes(32).toString("hex");
+    const params = new URLSearchParams({
+        client_id: process.env.UID,
+        redirect_uri: "http://localhost:3000/finish",
+        response_type: "code",
+        scope: "profile read",
+        state: state
+    });
+
+    //putting ts into a cookie
+    res.cookie("oauth_state", state);
+
+    res.redirect(`https://hackatime.hackclub.com/oauth/authorize?${params}`);
+});
+
+server.get("/finish", (req, res) => {
+    const true_state = req.cookies.oauth_state;
+    const hackatime_state = req.query.state;
+
+    if (true_state === hackatime_state) {
+        console.log("IT WORKED BABYYY");
+        // res.cookie("code", res.query.code);
+    }
+    // console.log(req.cookies.code);
+})
+
+
+// ------------------------------- HACKATIME END -------------------------------
+// ------------------------------- BOT START -------------------------------
+app.command("/streaksaver-help", async ({ command, ack, respond }) => {
     await ack();
     await respond({
         text: `
 Commands available:
-/doyowork-ping - tests the latence of the bot
-/doyowork-help - you just found out what it does
-/doyowork-set_goal - sets your goal for the day
-/doyowork-get_goal - tells you what your goal was
+/streaksaver-ping - tests the latence of the bot
+/streaksaver-help - you just found out what it does
+/streaksaver-set_goal - sets your goal for the day
+/streaksaver-get_goal - tells you what your goal was
         `})
     // Update the above string whenever you add a new command IMPORTANT
 });
 
-app.command("/doyowork-ping", async ({ command, ack, respond }) => {
+app.command("/streaksaver-ping", async ({ command, ack, respond }) => {
     const start = Date.now();
     await ack();
     const latency = Date.now() - start;
     await respond({ text: `Pong!\nLatency: ${latency}ms` });
 });
 
-app.command("/doyowork-set_goal", async ({ ack, command, respond }) => {
+app.command("/streaksaver-set_goal", async ({ ack, command, respond }) => {
     await ack();
     const goal = command.text.trim();
 
@@ -50,11 +83,10 @@ app.command("/doyowork-set_goal", async ({ ack, command, respond }) => {
     goals[command.user_id] = goal
 
     await respond({ text: `Your goal for the day has been set to: "${goal}"` });
-
-
 });
 
-app.command("/doyowork-get_goal", async ({ ack, command, respond }) => {
+
+app.command("/streaksaver-get_goal", async ({ ack, command, respond }) => {
     const goal = goals[command.user_id]
 
     await ack();
@@ -66,8 +98,47 @@ app.command("/doyowork-get_goal", async ({ ack, command, respond }) => {
 });
 
 
+// BOT CONNECTING TO HACKATIM IMPORTANT
 
-// API STUFF
+app.command("/streaksaver-connect", async ({ ack, command, respond }) => {
+    await ack();
+
+    await respond({
+        text: "Click on the button below. You will be redirected to hackatime OAuth",
+        blocks: [
+            {
+                type: "section",
+                text: {
+                    type: "mrkdwn",
+                    text: "Click button below to connect to hackactime"
+                }
+            },
+            {
+                type: "actions",
+                elements: [
+                    {
+                        type: "button",
+                        text: {
+                            type: "plain_text",
+                            text: "Connect"
+                        },
+                        action_id: "connect"
+                    }
+                ]
+            }
+        ]
+        // action_id: "connect"
+    });
+});
+
+app.action("connect", async ({ ack, respond }) => {
+    await ack();
+
+    await respond("hello")
+})
+
+// ------------------------------- BOT END -------------------------------
+// ------------------------------- API SHYT -------------------------------
 
 
 server.get("/api/goals/:userId", (req, res) => {
@@ -86,36 +157,8 @@ server.get("/api/goals/:userId", (req, res) => {
     })
 });
 
-// HACKATIME STUFF
-
-server.get("/login", (req, res) => {
-    const state = crypto.randomBytes(32).toString("hex");
-    const params = new URLSearchParams({
-        client_id: process.env.UID,
-        redirect_uri: "http://localhost:3000/finish",
-        response_type: "code",
-        scope:"profile read",
-        state: state
-    });
-
-    //putting ts into a cookie
-    res.cookie("oauth_state", state);
-    
-    res.redirect(`https://hackatime.hackclub.com/oauth/authorize?${params}`);
-});
-
-server.get("/finish", (req, res) => {
-    const true_state = req.cookies.oauth_state;
-    const hackatime_state = req.query.state;
-
-    if (true_state === hackatime_state){
-        console.log("IT WORKED BABYYY");
-        // res.cookie("code", res.query.code);
-    }
-    // console.log(req.cookies.code);
-})
-
-// Turning on server and bot
+// ------------------------------- API END -------------------------------
+// ------------------------------- STARTING CONFIRMATION -------------------------------
 
 server.listen(3000, () => {
     console.log("Server is running")
@@ -126,4 +169,5 @@ server.listen(3000, () => {
     await app.start();
     console.log("bot is running!");
 })();
+
 

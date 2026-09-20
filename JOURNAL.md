@@ -36,7 +36,7 @@ Aditionally, I've added a few fail safes as well like trying to set a goal witho
 
 Time spent ~ 1hr 30 min
 
-Github Commit: will come in next commit
+Github Commit: https://github.com/CreativeDragon1/streakbuddy/commit/9ccb1897669f7f356a4cfe1d5e459ab612572b2a
 
 ## AI DISCLOSURE
 
@@ -52,6 +52,26 @@ Important security feature I implemented was using states, when I try logging in
 This state is stored in the users cookies, so lives locally on the users browsers and should be safe, atleast I hope so.
 
 
+# FORMAT
+
+# Journal 3
+
+Time spent ~40min
+
+Github Commit: will come in next commit
+
+## AI DISCLOSURE
+
+I was learning some more ways the slack bot can respond in and try creating a button which can run a action. I used AI to understand how to style, requirements and syntax in which I have to create the buttons and everything. learnt about .actions as well
+
+## What I did
+Renamed the bot to streaksaver from Do Yo Work, which was a temoprary name anyway. And yeah, worked on this which was really fun, as I crashed out cause no matter what I did, I couldn't get the json format right from memory, I had to reference to chatgpt quite a bit and I believe ive figured it out - kinda.
+
+Project is coming along pretty nicely, I have to write a README.md soon as well, and finish the hackatime integration. I also need to write the actual reminder system my self which is gonna be fun (its not) and I get why people hate on JS now. 
+
+P.S I've had to alt tab into edge/slack to test the bot in my private channel. Hopefully no time deductions. 
+
+I also did some housekeeping in the ```index.js``` considering its the place im gonna be yapping a lot in so yeah.
 
 # DELETE BELOW BEFORE SHIPPING
 # FORMAT
