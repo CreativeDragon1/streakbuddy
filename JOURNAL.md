@@ -1,3 +1,5 @@
+DISCLOSURE: Time spents are just estimates, they are what I think ive spent on the project, but I can be way off the actual time spent.
+
 # Journal 1
 
 Time spent ~ 1hr 22min
@@ -112,7 +114,7 @@ WISH ME LUCK AHHH
 
 Time spent ~ 1 hour
 
-Github Commit: will come in next commit
+Github Commit: https://github.com/CreativeDragon1/streakbuddy/commit/78bad67c8ebdc68e8b37b0fa41dbf308cb2914a4
 
 ## AI DISCLOSURE
 
@@ -127,6 +129,21 @@ I also implemented a new set interval that will cycle every second (going to inc
 
 AHHH im so tired
 
+# Journal 7
+
+Time spent ~ 10min
+
+Github Commit: will come in next commit
+
+## AI DISCLOSURE
+
+Only used AI for commit
+
+## What I did
+
+I made a super duper basic website for like the webhooks. This commit is a rather small one so I can later integrate the hackatime login directly thru the slack bot hopefully, i am not sure how its gonna work hopefully goes well. 
+
+I also updated ```/streaksaver-help``` with all the new commands i added
 
 # DELETE BELOW BEFORE SHIPPING
 # FORMAT

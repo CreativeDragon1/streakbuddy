@@ -114,6 +114,10 @@ Commands available:
 /streaksaver-help - you just found out what it does
 /streaksaver-set_goal - sets your goal for the day
 /streaksaver-get_goal - tells you what your goal was
+/streaksaver-connect - connects hackatime account
+/streaksaver-hours - Tells you your logged hours for today
+/streaksaver-remind - reminds you stuff
+/streaksaver-un-remind  - stops reminding you stuff
         `})
     // Update the above string whenever you add a new command IMPORTANT
 });
@@ -182,7 +186,7 @@ app.command("/streaksaver-get_goal", async ({ ack, command, respond }) => {
 });
 
 
-// BOT CONNECTING TO HACKATIM IMPORTANT 
+// BOT CONNECTING TO HACKATIME IMPORTANT 
 
 // NOT DONE YET HAVE TO IMPLEMENT
 
@@ -264,7 +268,7 @@ setInterval(async () => {
             //AI slop ends here
 
             console.log(localTime)
-            if (localTime === "00:10") {
+            if (localTime === "18:00") {
                 await app.client.chat.postMessage({
                     channel: command.user_id,
                     text: "GO WORK ON YOUR PROJECT!"
@@ -294,6 +298,7 @@ server.get("/api/goals/:userId", (req, res) => {
         goal: goal
     })
 });
+
 
 // ------------------------------- API END -------------------------------
 // ------------------------------- STARTING CONFIRMATION -------------------------------
