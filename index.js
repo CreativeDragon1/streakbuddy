@@ -21,6 +21,8 @@ const goals = [];
 const auth_token = [];
 const remind = [];
 const timezones = [];
+const times = [];
+
 
 // ------------------------------- VARIABLES END -------------------------------
 // ------------------------------- HACKATIME START -------------------------------
@@ -29,7 +31,7 @@ server.get("/login", (req, res) => {
     const state = crypto.randomBytes(32).toString("hex");
     const params = new URLSearchParams({
         client_id: process.env.UID,
-        redirect_uri: "http://localhost:3000/finish",
+        redirect_uri: process.env.URI,
         response_type: "code",
         scope: "profile read",
         state: state
@@ -95,6 +97,7 @@ server.get("/finish", (req, res) => {
                     auth_token[Slack_ID] = token
                 });
         });
+    res.redirect("https://creativedragon1.github.io/streakbuddy/finish");
 });
 
 
@@ -118,6 +121,7 @@ Commands available:
 /streaksaver-hours - Tells you your logged hours for today
 /streaksaver-remind - reminds you stuff
 /streaksaver-un-remind  - stops reminding you stuff
+/streaksaver-reminder-time - Sets your reminder time
         `})
     // Update the above string whenever you add a new command IMPORTANT
 });
@@ -212,7 +216,8 @@ app.command("/streaksaver-connect", async ({ ack, command, respond }) => {
                             type: "plain_text",
                             text: "Connect"
                         },
-                        action_id: "connect"
+                        url: "https://creativedragon1.github.io/streakbuddy/login",
+                        action_id: "open_website"
                     }
                 ]
             }
@@ -221,13 +226,9 @@ app.command("/streaksaver-connect", async ({ ack, command, respond }) => {
     });
 });
 
-app.action("connect", async ({ ack, respond }) => {
-    await ack();
 
-    await respond("hello")
-})
 
-app.command("/streaksaver-remind", async ({ ack, command, response }) => {
+app.command("/streaksaver-remind", async ({ ack, command, respond }) => {
     await ack();
     remind[command.user_id] = "true";
     timezones[command.user_id] = command.timeZone;
@@ -239,11 +240,23 @@ app.command("/streaksaver-remind", async ({ ack, command, response }) => {
     // })
 });
 
-app.command("/streaksaver-un-remind", async ({ ack, response, command }) => {
+app.command("/streaksaver-un-remind", async ({ ack, respond, command }) => {
     await ack();
     remind[command.user_id] = "false"
     console.log("removed")
 });
+
+app.command("/streaksaver-reminder-time", async ({ ack, respond, command }) => {
+    await ack();
+    if (/^\d{2}:\d{2}/.test(command.text)) {
+        times[command.user_id] = command.text;
+        console.log(command.text);
+    } else {
+        await respond({text: "Please give an input in the form of HH:MM in 24 hour format"});
+    }
+})
+
+
 // COMMAND END
 // BACKGROUND LOOP
 
@@ -268,7 +281,12 @@ setInterval(async () => {
             //AI slop ends here
 
             console.log(localTime)
-            if (localTime === "18:00") {
+            if (localTime === times[userId]) {
+                await app.client.chat.postMessage({
+                    channel: command.user_id,
+                    text: "GO WORK ON YOUR PROJECT!"
+                });
+            } else if (localTime === "18:00") {
                 await app.client.chat.postMessage({
                     channel: command.user_id,
                     text: "GO WORK ON YOUR PROJECT!"

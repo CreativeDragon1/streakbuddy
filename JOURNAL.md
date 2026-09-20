@@ -133,7 +133,7 @@ AHHH im so tired
 
 Time spent ~ 10min
 
-Github Commit: will come in next commit
+Github Commit: https://github.com/CreativeDragon1/streakbuddy/commit/6362462ee552dd2c78fde363301c0f554761b588
 
 ## AI DISCLOSURE
 
@@ -144,6 +144,21 @@ Only used AI for commit
 I made a super duper basic website for like the webhooks. This commit is a rather small one so I can later integrate the hackatime login directly thru the slack bot hopefully, i am not sure how its gonna work hopefully goes well. 
 
 I also updated ```/streaksaver-help``` with all the new commands i added
+
+
+# Journal (number)
+
+Time spent ~ 30 min
+
+Github Commit: will come in next commit
+
+## AI DISCLOSURE
+Used AI to understand how I can use the github pages website to actually have you do the hackatime thingy, so it told me to have host a server, but ofc, I can't do that duh, so my next best alternative was to use my laptop as a sevrver as thats the cheapest, fastest and probably easiest way. 
+
+## What I did
+On my very basic website for hackatime login, i added a login button that you should use to log in to hackatime ofcourse, which will redirect you to ```localhost:3000/finish``` which will again redirect you to ```https://creativedragon1.github.io/streakbuddy/finish``` where you will be prompted to close da tabe and return to your slack :yay: butttttttt ofc this method isnt the cleanest, so MAYBE if i am to somehow get a server to run this on so thaat would be great ofcourse. 
+
+I added a feature also where you can set the time you want to be reminded at which is kinda cool cuz I got to learn how to use regex ofcourse with gpts help, but yeah, to check formating of the value inputted, i used regex which was so damn cool! and yeah it will now ping you if you set the time, and it would defaults to 1800 if not set
 
 # DELETE BELOW BEFORE SHIPPING
 # FORMAT
