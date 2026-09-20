@@ -184,7 +184,7 @@ I fixed the errors, atleasst I tried to, and I hope most of them are resolved no
 
 Time spent 1 hour
 
-Github Commit: will come in next commit
+Github Commit: https://github.com/CreativeDragon1/streakbuddy/commit/6c2daa69f6f1dc623d447f8902401702f7fa16d8
 
 ## AI DISCLOSURE
 Used AI to generate a bit of the code ~5-6 lines cause I could not get the stupid date thingy to work like at all idk why. and used AI for my bug solving but but, ive had to use it wayyy less, I was able to do a lot more bug solving by myself rather than have to go to AI to help me which is GOOOD
@@ -194,6 +194,22 @@ I worked on another set interval that refreshes every 5 min, it checks thru ever
 
 AND ALWAYS REMEMBER TO PUT THE START DATE IN THE URL AND NOT THE HEADER, my dumb ah wasted 20 min tryna figure out why it wouldnt work by myself, i caught so many syntax errors along the way and god do i forget to put ```;``` python has truely spoilt me.
 
+# Journal 11
+
+Time spent ~ 1 hrish 
+
+Github Commit: will come in next commit
+
+## AI DISCLOSURE
+
+used ai a tad bit, but it was for the same errors i was getting before. Its like i keep making those same dumb ah mistakes but it is 4 in the morning I guess I can cut myself some slack. Using ai for da commits asw
+
+## What I did
+MADE THE READ ME RAHHH spent a solid 30 min just writing the readme, although its not much, I spent a lot of my time, tryna like figure out how people make those trees for like their repo structure and all, gave up and made my own HAND CODED. UGH
+
+I also wrote everything in the readme like how to download use, etc, etc. Tried making it as fool proof as it gets.
+
+As a fun addon, I also created two more apis in which you can request to the server to get the users streaks or the amount of hours they have logged in a day.
 
 # DELETE BELOW BEFORE SHIPPING
 # FORMAT

@@ -380,6 +380,78 @@ server.get("/api/goals/:userId", (req, res) => {
     })
 });
 
+server.get("/api/streak/:userId", (req, res) => {
+    const userId = req.params.userId
+    var streak = 0
+
+    fetch("https://hackatime.hackclub.com/api/v1/authenticated/streak", {
+        method: "GET",
+        headers: {
+            Authorization: `Bearer ${auth_token[userId]}`
+        }
+    })
+        .then(response => response.json())
+        .then(json => {
+            streak = json.streak_days;
+            console.log(streak)
+            res.json({
+                userId: userId,
+                streak: streak
+            })
+        })
+        .catch(error => {
+            console.error(error);
+
+            res.status(500).json({
+                error: "An error occured"
+            })
+        });
+
+});
+
+server.get("/api/hours/:userId", (req, res) => {
+    const userId = req.params.userId
+    var hora = 0
+
+    // AII ALERT
+    // I tried my best to go on stack over flow find solutions but my problem was so niche, since we live in different timezones and im guessing hackatime servers 
+    //live in the us, the timezones dont match, i have no idea what im doing wrong, so i had to resort to using AI EVEN IF I DIDNT WANT TO
+    const date = new Date();
+    date.setDate(date.getDate());
+
+    const formatter = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/New_York',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
+
+    const yesterdaysDate = formatter.format(date);
+    console.log(yesterdaysDate);
+
+    // AI END
+    const response = fetch(`https://hackatime.hackclub.com/api/v1/authenticated/hours?start_date=${yesterdaysDate}`, {
+        method: "GET",
+        headers: {
+            start_date: yesterdaysDate, //YOU HAD TO PUT THE THING IN URL NOT HEADERS I am gen so dumb 
+            Authorization: `Bearer ${auth_token[userId]}`
+        }
+    }).then(response => response.json())
+    .then(json => {
+        hora = (json.total_seconds) / 3600;
+
+        res.json({
+            userId: userId,
+            hours: hora
+        });
+    }).catch(error => {
+        console.error(error);
+
+        res.status(500).json({
+            error: "Something went wrong"
+        });
+    });
+});
 
 // ------------------------------- API END -------------------------------
 // ------------------------------- STARTING CONFIRMATION -------------------------------

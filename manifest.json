@@ -30,16 +30,43 @@
                 "command": "/streaksaver-get_goal",
                 "description": "gets your goal for the day",
                 "should_escape": false
+            },
+            {
+                "command": "/streaksaver-connect",
+                "description": "connects hackatime account",
+                "should_escape": false
+            },
+            {
+                "command": "/streaksaver-hours",
+                "description": "Tells you your logged hours",
+                "should_escape": false
+            },
+            {
+                "command": "/streaksaver-remind",
+                "description": "reminds you stuff",
+                "should_escape": false
+            },
+            {
+                "command": "/streaksaver-un-remind",
+                "description": "stops reminding you stuff",
+                "should_escape": false
+            },
+            {
+                "command": "/streaksaver-reminder-time",
+                "description": "Sets your reminder time",
+                "usage_hint": "(HH/MM)",
+                "should_escape": false
             }
         ]
     },
     "oauth_config": {
         "scopes": {
             "bot": [
-                "chat:write",
-                "commands",
+                "im:write",
+                "app_mentions:read",
                 "channels:history",
-                "app_mentions:read"
+                "chat:write",
+                "commands"
             ]
         },
         "pkce_enabled": false
