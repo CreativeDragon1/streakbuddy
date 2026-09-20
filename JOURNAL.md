@@ -160,6 +160,22 @@ On my very basic website for hackatime login, i added a login button that you sh
 
 I added a feature also where you can set the time you want to be reminded at which is kinda cool cuz I got to learn how to use regex ofcourse with gpts help, but yeah, to check formating of the value inputted, i used regex which was so damn cool! and yeah it will now ping you if you set the time, and it would defaults to 1800 if not set
 
+
+# Journal (number)
+
+Time spent ~ 1hours
+
+Github Commit: will come in next commit
+
+## AI DISCLOSURE
+Used AI for debugging the problems I found and fixed them so yaaaaaaaaaa, sooo tired UGH. All the bits I have fully ai generated have been marked :0
+
+## What I did
+
+I spent some time doing some bug fixing cause it started I was adding wayy too many different features quickly without testing them and oh boy was i in for a treat, the uri stopped working, there were issues with setting the time goal and yeah, an whole array of issues which im glad i addressed right now. Its sad that a lot of the work I did didnt get logged because I had to leave the IDE here and there, to go to slack api or slack to test the bot but its fine I guess :sad_pepe:
+
+I fixed the errors, atleasst I tried to, and I hope most of them are resolved now, Ive got 1hr 45 min to go and its 2 am rn AHHH.
+
 # DELETE BELOW BEFORE SHIPPING
 # FORMAT
 

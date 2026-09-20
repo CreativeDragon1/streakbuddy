@@ -31,7 +31,7 @@ server.get("/login", (req, res) => {
     const state = crypto.randomBytes(32).toString("hex");
     const params = new URLSearchParams({
         client_id: process.env.UID,
-        redirect_uri: process.env.URI,
+        redirect_uri: "http://localhost:3000/finish",
         response_type: "code",
         scope: "profile read",
         state: state
@@ -75,7 +75,7 @@ server.get("/finish", (req, res) => {
         .then(response => response.json())
         .then(json => {
             console.log(json);
-            res.send("OAuth Sucessful");
+            // res.send("OAuth Sucessful");
             const token = json.access_token;
             console.log(token);
 
@@ -94,9 +94,10 @@ server.get("/finish", (req, res) => {
 
                     // Storing the token
 
-                    auth_token[Slack_ID] = token
-                });
+                    auth_token[Slack_ID] = token;
+                })
         });
+
     res.redirect("https://creativedragon1.github.io/streakbuddy/finish");
 });
 
@@ -252,7 +253,7 @@ app.command("/streaksaver-reminder-time", async ({ ack, respond, command }) => {
         times[command.user_id] = command.text;
         console.log(command.text);
     } else {
-        await respond({text: "Please give an input in the form of HH:MM in 24 hour format"});
+        await respond({ text: "Please give an input in the form of HH:MM in 24 hour format" });
     }
 })
 
@@ -266,12 +267,16 @@ app.command("/streaksaver-reminder-time", async ({ ack, respond, command }) => {
 
 setInterval(async () => {
     const now = new Date();
-
     for (const userId in remind) {
         console.log(userId, remind[userId]);
 
         //AI generated below bit, cuz i dont understand it asw
         if (remind[userId] === "true") {
+
+            const dm = await app.client.conversations.open({
+                users: userId,
+            });
+
             const localTime = new Intl.DateTimeFormat("en-GB", {
                 timeZone: timezones[userId],
                 hour: "2-digit",
@@ -283,18 +288,18 @@ setInterval(async () => {
             console.log(localTime)
             if (localTime === times[userId]) {
                 await app.client.chat.postMessage({
-                    channel: command.user_id,
+                    channel: dm.channel.id,
                     text: "GO WORK ON YOUR PROJECT!"
                 });
             } else if (localTime === "18:00") {
                 await app.client.chat.postMessage({
-                    channel: command.user_id,
+                    channel: dm.channel.id,
                     text: "GO WORK ON YOUR PROJECT!"
                 });
             };
         };
     };
-}, 1000);
+}, 60*1000);
 
 
 // ------------------------------- BOT END -------------------------------
