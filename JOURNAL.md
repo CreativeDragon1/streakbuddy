@@ -198,7 +198,7 @@ AND ALWAYS REMEMBER TO PUT THE START DATE IN THE URL AND NOT THE HEADER, my dumb
 
 Time spent ~ 1 hrish 
 
-Github Commit: will come in next commit
+Github Commit: https://github.com/CreativeDragon1/streakbuddy/commit/237871410e710fd17f34758107d051735d136048
 
 ## AI DISCLOSURE
 
@@ -211,12 +211,25 @@ I also wrote everything in the readme like how to download use, etc, etc. Tried 
 
 As a fun addon, I also created two more apis in which you can request to the server to get the users streaks or the amount of hours they have logged in a day.
 
+# Journal 12
+
+Time spent ~ 1 hour ish
+
+Github Commit: will come in next commit
+
+## AI DISCLOSURE
+
+used ai for debugging, but ended up just using my own brain cuz i got a hang of it,
+## What I did
+
+While tryna create the image for like the banner (changes requested by reviewer) I lowk realised that in the process, i had broken one of my projocts completely, so I spent like an hour tryna fix random errors and guess what. THOSE BLOODY ERRORS WERE CAUSEED CUZ I WAS TRYNA COMPARE A STRING TO A BOOLEAN LIKE WTH MAN IM SO STUPID but yea. thats what happened. not. fun. at. all.
+
 # DELETE BELOW BEFORE SHIPPING
 # FORMAT
 
 # Journal (number)
 
-Time spent ~
+Time spent ~ 
 
 Github Commit: will come in next commit
 

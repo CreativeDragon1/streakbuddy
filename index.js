@@ -32,7 +32,7 @@ server.get("/login", (req, res) => {
     const state = crypto.randomBytes(32).toString("hex");
     const params = new URLSearchParams({
         client_id: process.env.UID,
-        redirect_uri: "http://localhost:3000/finish",
+        redirect_uri: process.env.URI,
         response_type: "code",
         scope: "profile read",
         state: state
@@ -246,10 +246,17 @@ app.command("/streaksaver-connect", async ({ ack, command, respond }) => {
 
 app.command("/streaksaver-remind", async ({ ack, command, respond }) => {
     await ack();
-    remind[command.user_id] = "true";
-    timezones[command.user_id] = command.timeZone;
+    remind[command.user_id] = true;
 
-    console.log("done")
+    const userInfo = await app.client.users.info({
+        user: command.user_id
+    });
+
+    timezones[command.user_id] = userInfo.user.tz;
+
+    console.log("done");
+    done[command.user_id] = false;
+    await respond({ text: "Reminder set, run /streaksaver-reminder-time to set the time you want to be reminded at" })
     // await app.client.chat.postMessage({
     //     channel: command.user_id,
     //     text: "GO WORK ON YOUR PROJECT!"
@@ -258,8 +265,8 @@ app.command("/streaksaver-remind", async ({ ack, command, respond }) => {
 
 app.command("/streaksaver-un-remind", async ({ ack, respond, command }) => {
     await ack();
-    remind[command.user_id] = "false"
-    console.log("removed")
+    remind[command.user_id] = false;
+    console.log("removed");
 });
 
 app.command("/streaksaver-reminder-time", async ({ ack, respond, command }) => {
@@ -267,6 +274,7 @@ app.command("/streaksaver-reminder-time", async ({ ack, respond, command }) => {
     if (/^\d{2}:\d{2}/.test(command.text)) {
         times[command.user_id] = command.text;
         console.log(command.text);
+        await respond({ text: "Reminder set " });
     } else {
         await respond({ text: "Please give an input in the form of HH:MM in 24 hour format" });
     }
@@ -278,7 +286,7 @@ app.command("/streaksaver-reminder-time", async ({ ack, respond, command }) => {
 
 //LOGIC so this thing is gonna check every minute and thru all the users if like the dude has a reminder set at that time
 //Problem 1 I need to store everyones like timezone data somewhere, this can probably be done by just creating a slash command that you run that will start reminders for you
-//implementation
+//implementation 
 
 setInterval(async () => {
 
@@ -316,9 +324,9 @@ setInterval(async () => {
         const time = (json.total_seconds) / 60;
 
         if (time > 30) {
-            done[userId] = "true";
+            done[userId] = true;
         } else {
-            done[userId = "false"];
+            done[userId] - false;
         }
     }
 }, 5 * 60 * 1000);
@@ -327,29 +335,36 @@ setInterval(async () => {
     const now = new Date();
     for (const userId in remind) {
         console.log(userId, remind[userId]);
+        console.log(done[userId], remind[userId]);
+        console.log(timezones[userId], times[userId]);
 
         //AI generated below bit, cuz i dont understand it asw
-        if (remind[userId] === "true" && done[userId === "false"]) {
+        const localTime = new Intl.DateTimeFormat("en-GB", {
+            timeZone: timezones[userId],
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false
+        }).format(now);
+        //AI slop ends here
+
+        console.log(localTime);
+
+        console.log(remind[userId] === true && done[userId] !== true)
+        if (remind[userId] === true && done[userId] !== true) {
 
             const dm = await app.client.conversations.open({
                 users: userId,
             });
-
-            const localTime = new Intl.DateTimeFormat("en-GB", {
-                timeZone: timezones[userId],
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false
-            }).format(now);
-            //AI slop ends here
-
-            console.log(localTime)
-            if (localTime === times[userId]) {
+            
+            console.log(localTime);
+            if (localTime.toString() === times[userId].toString()) {
+                console.log("bro chacho is not good to go");
                 await app.client.chat.postMessage({
                     channel: dm.channel.id,
                     text: "GO WORK ON YOUR PROJECT!"
                 });
             } else if (localTime === "18:00") {
+                console.log("bro chacho not is  good to go")
                 await app.client.chat.postMessage({
                     channel: dm.channel.id,
                     text: "GO WORK ON YOUR PROJECT!"
@@ -437,20 +452,20 @@ server.get("/api/hours/:userId", (req, res) => {
             Authorization: `Bearer ${auth_token[userId]}`
         }
     }).then(response => response.json())
-    .then(json => {
-        hora = (json.total_seconds) / 3600;
+        .then(json => {
+            hora = (json.total_seconds) / 3600;
 
-        res.json({
-            userId: userId,
-            hours: hora
-        });
-    }).catch(error => {
-        console.error(error);
+            res.json({
+                userId: userId,
+                hours: hora
+            });
+        }).catch(error => {
+            console.error(error);
 
-        res.status(500).json({
-            error: "Something went wrong"
+            res.status(500).json({
+                error: "Something went wrong"
+            });
         });
-    });
 });
 
 // ------------------------------- API END -------------------------------
