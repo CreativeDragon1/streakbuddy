@@ -355,20 +355,34 @@ setInterval(async () => {
             const dm = await app.client.conversations.open({
                 users: userId,
             });
-            
+
             console.log(localTime);
+
+
             if (localTime.toString() === times[userId].toString()) {
                 console.log("bro chacho is not good to go");
-                await app.client.chat.postMessage({
-                    channel: dm.channel.id,
-                    text: "GO WORK ON YOUR PROJECT!"
-                });
+
+                try {
+                    await app.client.chat.postMessage({
+                        channel: dm.channel.id,
+                        text: "GO WORK ON YOUR PROJECT!"
+                    });
+                } catch (error) {
+                    console.error("Failed to send reminder:", error);
+
+                }
+
             } else if (localTime === "18:00") {
                 console.log("bro chacho not is  good to go")
-                await app.client.chat.postMessage({
-                    channel: dm.channel.id,
-                    text: "GO WORK ON YOUR PROJECT!"
-                });
+                try {
+                    await app.client.chat.postMessage({
+                        channel: dm.channel.id,
+                        text: "GO WORK ON YOUR PROJECT!"
+                    });
+                } catch (error) {
+                    console.error("Failed to send reminder:", error);
+
+                }
             };
         };
     };
