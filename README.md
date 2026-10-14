@@ -1,4 +1,5 @@
 # streaksaver
+<img width="381" height="73" alt="image" src="https://github.com/user-attachments/assets/fbe6e3bd-2e52-4a78-bfed-e7fe0ed6cdd6" />
 
 ## Features
 
