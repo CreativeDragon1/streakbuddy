@@ -1,6 +1,11 @@
 # streaksaver
 <img width="381" height="73" alt="image" src="https://github.com/user-attachments/assets/fbe6e3bd-2e52-4a78-bfed-e7fe0ed6cdd6" />
 
+
+## Why I made it
+
+I needed a way to see if i did my 30 min of hackatime everyday so i dont forget how to code. It was kinda fun until the bugs and the ssh issues got to me but in the end it worked out and it all workss now :0 
+
 ## Features
 
 - Track hours logged using hackatime
