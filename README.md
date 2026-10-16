@@ -12,6 +12,17 @@
 - A SLACK BOT YOU CAN TALK TO?!
 - Opensource
 
+## Tech Stack
+
+- **Runtime:** Node.js
+- **Language:** JavaScript (CommonJS)
+- **Framework:** Express.js
+- **Slack Integration:** Slack Bolt for JavaScript (`@slack/bolt`)
+- **Communication:** Slack Socket Mode
+- **Environment Variables:** dotenv
+- **Cookie Management:** cookie-parser
+- **Cryptography:** Node.js `crypto` module
+
 ## How to set it up
 
 1. You invite the bot to your slack workspace
